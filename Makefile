@@ -13,6 +13,8 @@ APPDIR  = $(PREFIX)/share/applications
 # ICONDIR = $(PREFIX)/share/icons/hicolor/256x256/apps
 SYSTEMDUSERDIR = $(PREFIX)/lib/systemd/user
 
+TOPDIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
+
 SRC = src/main.c src/app.c src/state.c src/config.c src/desktop_match.c src/dock.c src/hypr.c src/hypr_events.c src/watch.c src/launcher.c
 
 .PHONY: all clean install uninstall
@@ -29,11 +31,15 @@ clean:
 
 install: $(BIN)
 	install -Dm755 "$(BIN)" "$(DESTDIR)$(BINDIR)/hyprdock"
-	install -Dm644 config.ini "$(DESTDIR)$(DATADIR)/config.ini"
-	install -Dm644 style.css  "$(DESTDIR)$(DATADIR)/style.css"
-	install -Dm644 packaging/hyprdock.desktop "$(DESTDIR)$(APPDIR)/hyprdock.desktop"
+	# install -Dm644 config.ini "$(DESTDIR)$(DATADIR)/config.ini"
+	# install -Dm644 style.css  "$(DESTDIR)$(DATADIR)/style.css"
+	# install -Dm644 packaging/hyprdock.desktop "$(DESTDIR)$(APPDIR)/hyprdock.desktop"
 	# install -Dm644 packaging/hyprdock.png "$(DESTDIR)$(ICONDIR)/hyprdock.png"
-	install -Dm644 packaging/hyprdock.service "$(DESTDIR)$(SYSTEMDUSERDIR)/hyprdock.service"
+	# install -Dm644 packaging/hyprdock.service "$(DESTDIR)$(SYSTEMDUSERDIR)/hyprdock.service"
+	install -Dm644 "$(TOPDIR)/config.ini" "$(DESTDIR)$(DATADIR)/config.ini"
+	install -Dm644 "$(TOPDIR)/style.css"  "$(DESTDIR)$(DATADIR)/style.css"
+	install -Dm644 "$(TOPDIR)/packaging/hyprdock.desktop" "$(DESTDIR)$(APPDIR)/hyprdock.desktop"
+	install -Dm644 "$(TOPDIR)/packaging/hyprdock.service" "$(DESTDIR)$(SYSTEMDUSERDIR)/hyprdock.service"
 
 uninstall:
 	rm -f "$(DESTDIR)$(BINDIR)/hyprdock"
