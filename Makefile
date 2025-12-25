@@ -15,6 +15,8 @@ SYSTEMDUSERDIR = $(PREFIX)/lib/systemd/user
 
 SRC = src/main.c src/app.c src/state.c src/config.c src/desktop_match.c src/dock.c src/hypr.c src/hypr_events.c src/watch.c src/launcher.c
 
+.PHONY: all clean install uninstall
+
 all: $(BIN)
 
 $(BIN): $(SRC)
@@ -25,8 +27,8 @@ $(BIN): $(SRC)
 clean:
 	rm -rf $(BUILD_DIR)
 
-install: hyprdock
-	install -Dm755 hyprdock "$(DESTDIR)$(BINDIR)/hyprdock"
+install: $(BIN)
+	install -Dm755 "$(BIN)" "$(DESTDIR)$(BINDIR)/hyprdock"
 	install -Dm644 config.ini "$(DESTDIR)$(DATADIR)/config.ini"
 	install -Dm644 style.css  "$(DESTDIR)$(DATADIR)/style.css"
 	install -Dm644 packaging/hyprdock.desktop "$(DESTDIR)$(APPDIR)/hyprdock.desktop"
