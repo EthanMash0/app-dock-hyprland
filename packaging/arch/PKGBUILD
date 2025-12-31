@@ -1,16 +1,15 @@
-pkgname=hyprdock-git
-pkgver=efce1a1
+pkgname=app-dock-hyprland-git
+pkgver=2471d57
 pkgrel=1
 pkgdesc="Bottom dock for Hyprland (GTK4 layer-shell)"
 arch=(x86_64)
-url="https://github.com/EthanMash0/hyprdock.git"
-# license=(MIT)  # adjust
+url="https://github.com/EthanMash0/app-dock-hyprland.git"
 depends=(gtk4 gtk4-layer-shell glib2)
 makedepends=(git gcc make pkgconf)
-provides=(hyprdock)
-conflicts=(hyprdock)
+provides=(app-dock-hyprland)
+conflicts=(app-dock-hyprland)
 
-source=("hyprdock::git+file://$startdir/../..")
+source=("app-dock-hyprland::git+file://$startdir/../..")
 sha256sums=('SKIP')
 
 pkgver() {

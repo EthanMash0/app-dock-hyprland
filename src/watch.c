@@ -5,7 +5,7 @@
 
 #include "config.h"   // dock_find_config_path, dock_css_provider_reload
 #include "dock.h"     // idle_rebuild_config
-#include "state.h"    // HyprdockState
+#include "state.h"    // AppState
 
 static gboolean should_handle_event(GFileMonitorEvent ev) {
     return ev == G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT ||
@@ -21,7 +21,7 @@ void on_config_file_changed(GFileMonitor *mon,
 {
     (void)mon; (void)file; (void)other;
 
-    HyprdockState *st = (HyprdockState *)user_data;
+    AppState *st = (AppState *)user_data;
     if (!st) return;
     if (!should_handle_event(ev)) return;
 
@@ -37,7 +37,7 @@ void on_style_file_changed(GFileMonitor *mon,
 {
     (void)mon; (void)file; (void)other;
 
-    HyprdockState *st = (HyprdockState *)user_data;
+    AppState *st = (AppState *)user_data;
     if (!st) return;
     if (!should_handle_event(ev)) return;
 
@@ -74,7 +74,7 @@ void watch_user_file(const char *name, GCallback cb, gpointer user_data)
 
     // IMPORTANT: keep the monitor alive.
     // Best practice: store it on the state so it is unref'd during shutdown.
-    HyprdockState *st = (HyprdockState *)user_data;
+    AppState *st = (AppState *)user_data;
     if (st && st->monitors) {
         // st->monitors should be a GPtrArray with free func g_object_unref
         g_ptr_array_add(st->monitors, m); // transfers our ref into the array

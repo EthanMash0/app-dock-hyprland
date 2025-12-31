@@ -10,17 +10,17 @@ typedef struct {
     GtkWidget *dot;     // indicator widget
 } DockItem;
 
-// typedef struct HyprdockState HyprdockState;
+// typedef struct AppState AppState;
 
 gboolean idle_rebuild_config(gpointer data);
 
 gboolean dock_refresh_running(gpointer user_data);
 
-void rebuild_dock_from_config(HyprdockState *st);
+void rebuild_dock_from_config(AppState *st);
 
 // Called once after you create the dock box in app.c
-void dock_init(HyprdockState *st);
+void dock_init(AppState *st);
 
-void dock_shutdown(HyprdockState *st);
+void dock_shutdown(AppState *st);
 
 #endif

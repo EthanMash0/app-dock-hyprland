@@ -1,16 +1,6 @@
 # build output
 build/
 
-# build artifacts (in case anything ends up outside build/)
-*.o
-*.a
-*.so
-*.d
-*.dSYM/
-
-# binaries (fallback if built at repo root)
-hyprdock
-
 # compilation database
 compile_commands.json
 
@@ -20,12 +10,9 @@ compile_commands.json
 
 # editor / OS noise
 .DS_Store
-.idea/
 .vscode/
-*.swp
-*.swo
 
 # Arch packaging outputs (common makepkg artifacts)
-pkg/
+app-dock-hyprland/
 src/
 *.pkg.tar.*

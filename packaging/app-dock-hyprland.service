@@ -1,10 +1,10 @@
 [Unit]
-Description=Hyprdock
+Description=app-dock-hyprland
 After=graphical-session.target
 PartOf=graphical-session.target
 
 [Service]
-ExecStart=/usr/bin/hyprdock
+ExecStart=/usr/bin/app-dock-hyprland
 Restart=on-failure
 
 [Install]

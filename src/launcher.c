@@ -61,8 +61,8 @@ static const TermSpec *term_spec_for(const char *exe_base) {
 
 static char **build_terminal_argv(char **cmd_argv) {
     // Allow user override:
-    //   HYPRDOCK_TERMINAL (preferred) or TERMINAL
-    const char *env = g_getenv("HYPRDOCK_TERMINAL");
+    //   APP_TERMINAL (preferred) or TERMINAL
+    const char *env = g_getenv("APP_TERMINAL");
     if (!env || !*env) env = g_getenv("TERMINAL");
 
     char **term_argv = NULL;

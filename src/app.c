@@ -57,12 +57,12 @@ static void on_activate(GtkApplication *app, gpointer user_data) {
     gtk_window_set_child(GTK_WINDOW(win), outer);
 
     // Create state and attach it to the window for automatic cleanup
-    HyprdockState *st = hyprdock_state_new(box);
+    AppState *st = app_state_new(box);
     g_object_set_data_full(
         G_OBJECT(win),
-        "hyprdock-state",
+        "app-state",
         st,
-        (GDestroyNotify)hyprdock_state_free
+        (GDestroyNotify)app_state_free
     );
 
     // Build dock UI from current config/state
@@ -78,9 +78,9 @@ static void on_activate(GtkApplication *app, gpointer user_data) {
     gtk_window_present(GTK_WINDOW(win));
 }
 
-GtkApplication *hyprdock_app_new(void) {
+GtkApplication *app_new(void) {
     GtkApplication *app =
-        gtk_application_new("com.hyprdock.Hyprdock", G_APPLICATION_DEFAULT_FLAGS);
+        gtk_application_new("com.app.dock.hyprland", G_APPLICATION_DEFAULT_FLAGS);
 
     g_signal_connect(app, "activate", G_CALLBACK(on_activate), NULL);
     return app;

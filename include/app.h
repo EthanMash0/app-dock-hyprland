@@ -3,6 +3,6 @@
 
 #include <gtk-4.0/gtk/gtk.h>
 
-GtkApplication *hyprdock_app_new(void);
+GtkApplication *app_new(void);
 
 #endif

@@ -4,9 +4,9 @@
 #include "dock.h"
 #include "hypr_events.h"
 
-HyprdockState *hyprdock_state_new(GtkWidget *dock_box)
+AppState *app_state_new(GtkWidget *dock_box)
 {
-    HyprdockState *st = g_new0(HyprdockState, 1);
+    AppState *st = g_new0(AppState, 1);
 
     st->dock_box = dock_box;
 
@@ -30,7 +30,7 @@ HyprdockState *hyprdock_state_new(GtkWidget *dock_box)
     return st;
 }
 
-void hyprdock_state_free(HyprdockState *st)
+void app_state_free(AppState *st)
 {
     if (!st) return;
 

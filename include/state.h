@@ -20,9 +20,9 @@ typedef struct {
 	int event_fd;						// -1 if none
 	gint stop_requested;		// atomic
 	guint refresh_idle_id;	// recommended so stop can cancel it
-} HyprdockState;
+} AppState;
 
-HyprdockState *hyprdock_state_new(GtkWidget *dock_box);
-void hyprdock_state_free(HyprdockState *st);
+AppState *app_state_new(GtkWidget *dock_box);
+void app_state_free(AppState *st);
 
 #endif

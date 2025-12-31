@@ -3,14 +3,13 @@ CFLAGS = -O2 -Wall -Iinclude
 PKG = gtk4 gtk4-layer-shell-0
 
 BUILD_DIR ?= build
-BIN = $(BUILD_DIR)/hyprdock
+BIN = $(BUILD_DIR)/app-dock-hyprland
 
 PREFIX ?= /usr
 DESTDIR ?=
 BINDIR  = $(PREFIX)/bin
-DATADIR = $(PREFIX)/share/hyprdock
+DATADIR = $(PREFIX)/share/app-dock-hyprland
 APPDIR  = $(PREFIX)/share/applications
-# ICONDIR = $(PREFIX)/share/icons/hicolor/256x256/apps
 SYSTEMDUSERDIR = $(PREFIX)/lib/systemd/user
 
 TOPDIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
@@ -30,20 +29,14 @@ clean:
 	rm -rf $(BUILD_DIR)
 
 install: $(BIN)
-	install -Dm755 "$(BIN)" "$(DESTDIR)$(BINDIR)/hyprdock"
-	# install -Dm644 config.ini "$(DESTDIR)$(DATADIR)/config.ini"
-	# install -Dm644 style.css  "$(DESTDIR)$(DATADIR)/style.css"
-	# install -Dm644 packaging/hyprdock.desktop "$(DESTDIR)$(APPDIR)/hyprdock.desktop"
-	# install -Dm644 packaging/hyprdock.png "$(DESTDIR)$(ICONDIR)/hyprdock.png"
-	# install -Dm644 packaging/hyprdock.service "$(DESTDIR)$(SYSTEMDUSERDIR)/hyprdock.service"
+	install -Dm755 "$(BIN)" "$(DESTDIR)$(BINDIR)/app-dock-hyprland"
 	install -Dm644 "$(TOPDIR)/data/config.ini" "$(DESTDIR)$(DATADIR)/config.ini"
 	install -Dm644 "$(TOPDIR)/data/style.css"  "$(DESTDIR)$(DATADIR)/style.css"
-	install -Dm644 "$(TOPDIR)/packaging/hyprdock.desktop" "$(DESTDIR)$(APPDIR)/hyprdock.desktop"
-	install -Dm644 "$(TOPDIR)/packaging/hyprdock.service" "$(DESTDIR)$(SYSTEMDUSERDIR)/hyprdock.service"
+	install -Dm644 "$(TOPDIR)/packaging/app-dock-hyprland.desktop" "$(DESTDIR)$(APPDIR)/app-dock-hyprland.desktop"
+	install -Dm644 "$(TOPDIR)/packaging/app-dock-hyprland.service" "$(DESTDIR)$(SYSTEMDUSERDIR)/app-dock-hyprland.service"
 
 uninstall:
-	rm -f "$(DESTDIR)$(BINDIR)/hyprdock"
+	rm -f "$(DESTDIR)$(BINDIR)/app-dock-hyprland"
 	rm -f "$(DESTDIR)$(DATADIR)/config.ini" "$(DESTDIR)$(DATADIR)/style.css"
-	rm -f "$(DESTDIR)$(APPDIR)/hyprdock.desktop"
-	# rm -f "$(DESTDIR)$(ICONDIR)/hyprdock.png"
-	rm -f "$(DESTDIR)$(SYSTEMDUSERDIR)/hyprdock.service"
+	rm -f "$(DESTDIR)$(APPDIR)/app-dock-hyprland.desktop"
+	rm -f "$(DESTDIR)$(SYSTEMDUSERDIR)/app-dock-hyprland.service"

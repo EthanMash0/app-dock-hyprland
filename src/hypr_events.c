@@ -12,7 +12,7 @@
 #include "dock.h"
 
 static gboolean add_poll_source_cb(gpointer data) {
-    HyprdockState *st = data;
+    AppState *st = data;
     if (!st) return G_SOURCE_REMOVE;
 
     if (st->poll_id == 0) {
@@ -21,14 +21,14 @@ static gboolean add_poll_source_cb(gpointer data) {
     return G_SOURCE_REMOVE;
 }
 
-static void ensure_polling_fallback(HyprdockState *st) {
+static void ensure_polling_fallback(AppState *st) {
     if (!st) return;
     // Always add sources on the main context.
     g_main_context_invoke(NULL, add_poll_source_cb, st);
 }
 
 static gboolean refresh_idle_cb(gpointer data) {
-    HyprdockState *st = data;
+    AppState *st = data;
     if (!st) return G_SOURCE_REMOVE;
 
     st->refresh_idle_id = 0;
@@ -40,7 +40,7 @@ static gboolean refresh_idle_cb(gpointer data) {
     return G_SOURCE_REMOVE;
 }
 
-static void schedule_refresh(HyprdockState *st) {
+static void schedule_refresh(AppState *st) {
     if (!st) return;
     if (g_atomic_int_get(&st->stop_requested)) return;
 
@@ -83,7 +83,7 @@ static char *find_hypr_socket2_path(void) {
 }
 
 static gpointer hypr_event_thread(gpointer data) {
-    HyprdockState *st = data;
+    AppState *st = data;
     if (!st) return NULL;
 
     char *path = find_hypr_socket2_path();
@@ -155,7 +155,7 @@ static gpointer hypr_event_thread(gpointer data) {
     return NULL;
 }
 
-void hypr_events_start(HyprdockState *st) {
+void hypr_events_start(AppState *st) {
     if (!st) return;
 
     if (st->event_thread) return; // already started
@@ -166,7 +166,7 @@ void hypr_events_start(HyprdockState *st) {
     st->event_thread = g_thread_new("hypr-events", hypr_event_thread, st);
 }
 
-void hypr_events_stop(HyprdockState *st) {
+void hypr_events_stop(AppState *st) {
     if (!st) return;
 
     g_atomic_int_set(&st->stop_requested, 1);

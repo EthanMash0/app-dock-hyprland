@@ -14,7 +14,7 @@ static void dock_item_free(gpointer p) {
     g_free(it);
 }
 
-static void rebuild_items_array(HyprdockState *st) {
+static void rebuild_items_array(AppState *st) {
     if (st->items) g_ptr_array_free(st->items, TRUE);
     st->items = g_ptr_array_new_with_free_func(dock_item_free);
 }
@@ -29,7 +29,7 @@ static void clear_box(GtkWidget *box) {
 }
 
 gboolean idle_rebuild_config(gpointer data) {
-    HyprdockState *st = (HyprdockState*)data;
+    AppState *st = (AppState*)data;
     rebuild_dock_from_config(st);
     return G_SOURCE_REMOVE;
 }
@@ -46,7 +46,7 @@ static GtkWidget* make_dot(void) {
     return d;
 }
 
-static GtkWidget* make_app_widget(HyprdockState *st, const char *desktop_id, int icon_size) {
+static GtkWidget* make_app_widget(AppState *st, const char *desktop_id, int icon_size) {
     GtkWidget *btn = gtk_button_new();
     gtk_button_set_has_frame(GTK_BUTTON(btn), FALSE);
     gtk_widget_add_css_class(btn, "icon");
@@ -90,7 +90,7 @@ static GtkWidget* make_app_widget(HyprdockState *st, const char *desktop_id, int
     return btn;
 }
 
-static void dock_build_from_cfg(HyprdockState *st, const DockConfig *cfg) {
+static void dock_build_from_cfg(AppState *st, const DockConfig *cfg) {
     clear_box(st->dock_box);
     rebuild_items_array(st);
 
@@ -107,7 +107,7 @@ static void dock_build_from_cfg(HyprdockState *st, const DockConfig *cfg) {
 }
 
 gboolean dock_refresh_running(gpointer user_data) {
-    HyprdockState *st = (HyprdockState*)user_data;
+    AppState *st = (AppState*)user_data;
     if (!st) return G_SOURCE_REMOVE;
 
     if (!st->items || st->items->len == 0) return G_SOURCE_CONTINUE;
@@ -126,7 +126,7 @@ gboolean dock_refresh_running(gpointer user_data) {
     return G_SOURCE_CONTINUE;
 }
 
-void rebuild_dock_from_config(HyprdockState *st) {
+void rebuild_dock_from_config(AppState *st) {
     if (!st) return;
 
     DockConfig *newcfg = dock_config_load();
@@ -138,7 +138,7 @@ void rebuild_dock_from_config(HyprdockState *st) {
     st->cfg = newcfg;
 }
 
-void dock_init(HyprdockState *st) {
+void dock_init(AppState *st) {
     if (!st || !st->dock_box) return;
 
     // If state_new already loaded config, reuse it; otherwise load it here.
@@ -148,7 +148,7 @@ void dock_init(HyprdockState *st) {
     dock_build_from_cfg(st, st->cfg);
 }
 
-void dock_shutdown(HyprdockState *st) {
+void dock_shutdown(AppState *st) {
     if (!st) return;
 
     // Optional: clear the UI container (GTK will usually tear down anyway).

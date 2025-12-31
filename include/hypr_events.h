@@ -4,7 +4,7 @@
 #include "state.h"
 
 // Starts the Hyprland event thread. Safe to call once during app activate.
-void hypr_events_start(HyprdockState *st);
-void hypr_events_stop(HyprdockState *st);
+void hypr_events_start(AppState *st);
+void hypr_events_stop(AppState *st);
 
 #endif
