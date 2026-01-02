@@ -1,5 +1,5 @@
 pkgname=simple-gui-git
-pkgver=0a3e4f8
+pkgver=b2eb650
 pkgrel=1
 pkgdesc="Bottom dock for Hyprland (GTK4 layer-shell)"
 arch=(x86_64)

@@ -6,8 +6,11 @@
 
 typedef struct {
   GtkWidget *dock_box;
-	GtkWidget *search_box;
   GtkCssProvider *css;
+
+	GtkWidget *search_box;
+	GtkWidget *search_entry;
+	GtkWidget *search_flowbox;
 
   DockConfig *cfg;
 
